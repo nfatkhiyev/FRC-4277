@@ -32,7 +32,6 @@ public class MechDrive {
 		else if(xyz < -1){
 			xyz = -1;
 		}
-		
 		return xyz;
 	}
 	
