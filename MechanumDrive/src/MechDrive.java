@@ -45,7 +45,11 @@ public class MechDrive {
 		BackLeft.set(yVal - xVal + zVal);
 	}
 	
-	public void mechDirectionalDrive (Double angle, Double speed, Double durration) { // I honestly don't know what's going on here
+	public void mechDirectionalDrive (Double angle, Double speed, Double durration) { 
+		/*
+		This meathod is intended for autonomous use or button programming. The motor timeouts are define the amount of time
+		that the the robot will drive. I actually havent tried the setExpiriation line before, but I think it will work.
+		*/
 		//Sets motor timeouts
 		FrontRight.setExpiration(durration);
 		FrontLeft.setExpiration(durration);
@@ -53,29 +57,35 @@ public class MechDrive {
 		BackLeft.setExpiration(durration);
 		
 		//Conversion from polar to coordinate system
-		Double rad = angle * (Math.PI / 180);
-		Double xVal = Math.cos(rad) * speed;
+		Double rad = angle * (Math.PI / 180); // This converts standard degrees from the parameter into radians.
+		/*
+		The next 2 lines convert the input from polar coordinates to cartesian. It is a simple trig function that allows the
+		code to mimick a joystick (x,y) value instead of the inputted (angle,hypotenuse(speed)) values.
+		*/
+		Double xVal = Math.cos(rad) * speed; 
 		Double yVal = Math.sin(rad) * speed;
 		
-		//Drives the motors
+		//This section takes the new values from above and writes them to motors.
 		FrontRight.set(yVal - xVal);
 		BackLeft.set(yVal - xVal);
 		FrontLeft.set(yVal + xVal);
 		BackRight.set(yVal + xVal);
 	}
-	public void mechSpinRight (Double speed){ // Is this for automation?
+	public void mechSpinRight (Double speed){
+		// this is also intended for autonomous to orient the robot. 
+		//the stopping of the rotation will be controlled by a gyroscope set up in the subsystem because it will be easier to callibrate.
 		FrontRight.set(speed);
 		BackLeft.set(-speed);
 		FrontLeft.set(-speed);
 		BackRight.set(speed);
 	}
-	public void mechSpinLeft (Double speed){ // Is this for automation?
+	public void mechSpinLeft (Double speed){ // same as above
 		FrontRight.set(-speed);
 		BackLeft.set(speed);
 		FrontLeft.set(speed);
 		BackRight.set(-speed);
 	}
-	
+	// the last part is just returning values so you can display themon the dashboard for testing.
 	public double getFRValue(){
 		return FRValue;
 		
