@@ -24,6 +24,18 @@ public class MechDrive {
 		FLValue = FrontLeft.getSpeed();
 	}
 	
+	//Ensures that the given double does not exceed 1 or -1
+	public static double setMaxRange(double xyz){
+		if(xyz > 1){
+			xyz = 1;
+		}
+		else if(xyz < -1){
+			xyz = -1;
+		}
+		
+		return xyz;
+	}
+	
 	public void mechJoystickDrive(Joystick stick){
 		
 		double xVal = stick.getX();
@@ -39,10 +51,10 @@ public class MechDrive {
 		*your numbers in there. They're A-okay.
 		*/
 		
-		FrontRight.set(yVal - xVal - zVal);
-		BackRight.set(yVal + xVal - zVal);
-		FrontLeft.set(yVal + xVal + zVal);
-		BackLeft.set(yVal - xVal + zVal);
+		FrontRight.set(setMaxRange(yVal - xVal - zVal));
+		BackRight.set(setMaxRange(yVal + xVal - zVal));
+		FrontLeft.set(setMaxRange(yVal + xVal + zVal));
+		BackLeft.set(setMaxRange(yVal - xVal + zVal));
 	}
 	
 	public void mechDirectionalDrive (Double angle, Double speed, Double durration) { 
