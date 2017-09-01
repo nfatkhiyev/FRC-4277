@@ -39,7 +39,7 @@ public class MechDrive {
 		
 		double xVal = stick.getX();
 		double yVal = stick.getY();//experiment with multiplying the values
-		double zVal = stick.getTwist();
+		double zVal = stick.getTwist() / 2;
 		
 		/*
 		* Instead of providing an if statement when the joystick is twisted
