@@ -50,6 +50,11 @@ public class MechDrive {
 		double bLeft = ((Math.cos(angle)*speed)-(Math.sin(angle)*speed)+twist) / adjustor;
 		double bRight = ((Math.cos(angle)*speed)+(Math.sin(angle)*speed)-twist) / adjustor;
 		
+		if (Math.abs(fLeft) < 0.05) fLeft = 0;
+		if (Math.abs(fRight) < 0.05) fRight = 0;
+		if (Math.abs(bLeft) < 0.05) bLeft = 0;
+		if (Math.abs(bRight) < 0.05) bRight = 0;
+		
 		FrontLeft.set(fLeft);
 		FrontRight.set(fRight);
 		BackLeft.set(bLeft);
