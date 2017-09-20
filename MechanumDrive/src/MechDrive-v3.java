@@ -38,7 +38,7 @@ public class MechDrive {
 		if (Math.abs(yVal) < 0.05) yVal = 0;
 		if (Math.abs(twist) < 0.05) twist = 0;
 		
-		double adjustor = ((2*Math.sqrt(2))/2) + Math.abs(twist);
+		double adjustor = Math.sqrt(2) + Math.abs(twist);
 		
 		double speed = Math.sqrt((Math.pow(xVal, 2)) + (Math.pow(yVal, 2)));
 		double angle = Math.asin(yVal/Math.sqrt(yVal*yVal+xVal*xVal));
