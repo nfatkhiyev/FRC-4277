@@ -63,10 +63,10 @@ public class mecanumDrive extends Subsystem {
 		double speed = Math.sqrt((Math.pow(xVal, 2)) + (Math.pow(yVal, 2)));
 		double angle = Math.asin(yVal/speed);
 		
-		double fLeft = ((Math.cos(angle)*speed)-(Math.sin(angle)*speed)-twist) / adjustor;
-		double fRight = ((Math.cos(angle)*speed)+(Math.sin(angle)*speed)+twist) / adjustor;
-		double bLeft = ((Math.cos(angle)*speed)-(Math.sin(angle)*speed)+twist) / adjustor;
-		double bRight = ((Math.cos(angle)*speed)+(Math.sin(angle)*speed)-twist) / adjustor;
+		double fLeft = ((Math.sin(angle)*speed)-(Math.cos(angle)*speed)-twist) / adjustor;
+		double fRight = ((Math.sin(angle)*speed)+(Math.cos(angle)*speed)+twist) / adjustor;
+		double bLeft = ((Math.sin(angle)*speed)-(Math.cos(angle)*speed)+twist) / adjustor;
+		double bRight = ((Math.sin(angle)*speed)+(Math.cos(angle)*speed)-twist) / adjustor;
 		
 		if (Math.abs(fLeft) < 0.05) fLeft = 0;
 		if (Math.abs(fRight) < 0.05) fRight = 0;
@@ -94,10 +94,10 @@ public class mecanumDrive extends Subsystem {
 		double speed = Math.sqrt((Math.pow(xVal, 2)) + (Math.pow(yVal, 2)));
 		double angle = Math.asin(yVal/speed) + orientation;
 		
-		double fLeft = ((Math.cos(angle)*speed)-(Math.sin(angle)*speed)-twist) / adjustor;
-		double fRight = ((Math.cos(angle)*speed)+(Math.sin(angle)*speed)+twist) / adjustor;
-		double bLeft = ((Math.cos(angle)*speed)-(Math.sin(angle)*speed)+twist) / adjustor;
-		double bRight = ((Math.cos(angle)*speed)+(Math.sin(angle)*speed)-twist) / adjustor;
+		double fLeft = ((Math.sin(angle)*speed)-(Math.cos(angle)*speed)-twist) / adjustor;
+		double fRight = ((Math.sin(angle)*speed)+(Math.cos(angle)*speed)+twist) / adjustor;
+		double bLeft = ((Math.sin(angle)*speed)-(Math.cos(angle)*speed)+twist) / adjustor;
+		double bRight = ((Math.sin(angle)*speed)+(Math.cos(angle)*speed)-twist) / adjustor;
 		
 		if (Math.abs(fLeft) < 0.05) fLeft = 0;
 		if (Math.abs(fRight) < 0.05) fRight = 0;
