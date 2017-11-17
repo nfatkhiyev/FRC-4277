@@ -6,7 +6,6 @@ int INPUT_11 = 11;
 int INPUT_12 = 12;
 int LIGHT_13 = 13;
 
-boolean limitSwitch = false;
 
 void setup() {
   // put your setup code here, to run once:
