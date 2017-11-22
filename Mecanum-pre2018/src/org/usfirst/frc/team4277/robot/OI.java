@@ -51,7 +51,7 @@ public class OI {
 	public static boolean getdSTrigger() {
 		return dSTrigger.get();
 	}
-	public static double getGyro() {
+	public static double getGyroAngle() { // This is a continuous value that does not reset after one full rotation.
 		return gyro.getAngle();
 	}
 }

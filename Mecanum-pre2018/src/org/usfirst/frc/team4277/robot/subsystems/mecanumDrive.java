@@ -3,10 +3,10 @@ package org.usfirst.frc.team4277.robot.subsystems;
 import org.usfirst.frc.team4277.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.TalonSRX;
+import com.ctre.CANTalon;
+//import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.Utility;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 /**
  *
@@ -16,20 +16,33 @@ public class mecanumDrive extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	static TalonSRX FrontRight;
-	static TalonSRX FrontLeft;
-	static TalonSRX BackRight;
-	static TalonSRX BackLeft;
+	static CANTalon FrontRight;
+	static CANTalon FrontLeft;
+	static CANTalon BackRight;
+	static CANTalon BackLeft;
+	
+	/*
+	static Victor FrontRight;
+	static Victor FrontLeft;
+	static Victor BackRight;
+	static Victor BackLeft;
+	*/
 	
 	double FRValue,BRValue,FLValue,BLValue;
 	
 	 public mecanumDrive(int FR, int FL, int BR, int BL){
 		 
 			//motor controller assignments
-			FrontRight = new TalonSRX(FR);
-			FrontLeft = new TalonSRX(FL);
-			BackRight = new TalonSRX(BR);
-			BackLeft = new TalonSRX(BL);
+			FrontRight = new CANTalon(FR);
+			FrontLeft = new CANTalon(FL);
+			BackRight = new CANTalon(BR);
+			BackLeft = new CANTalon(BL);
+			/*
+			FrontRight = new Victor(FR);
+			FrontLeft = new Victor(FL);
+			BackRight = new Victor(BR);
+			BackLeft = new Victor(BL);
+			*/
 			BackLeft.setInverted(true);
 			FrontLeft.setInverted(true);
 			FRValue = FrontRight.getSpeed();
@@ -40,6 +53,10 @@ public class mecanumDrive extends Subsystem {
 			FrontLeft.setSafetyEnabled(true);
 			BackRight.setSafetyEnabled(true);
 			BackLeft.setSafetyEnabled(true);
+			//FrontRight.setVoltageRampRate(6);
+			//FrontLeft.setVoltageRampRate(6);
+			//BackRight.setVoltageRampRate(6);
+			//BackLeft.setVoltageRampRate(6);
 		}
 
     public void initDefaultCommand() {
@@ -79,17 +96,17 @@ public class mecanumDrive extends Subsystem {
 		BackRight.set(bRight);
 	}
 	
-	public static void mechJoystickGyroDrive(Joystick stick, Double gyro) {//hopefully we can get a navX gyro for precise data(IM)
+	public static void mechJoystickGyroDrive(Joystick stick, Double gyroAngle) {//hopefully we can get a navX gyro for precise data(IM)
 		double xVal = stick.getX();
 		double yVal = stick.getY();//experiment with running this through equations
 		double twist = stick.getTwist();
-		double orientation = Math.toRadians(gyro);
+		double orientation = Math.toRadians(gyroAngle);
 		
 		if (Math.abs(xVal) < 0.05) xVal = 0;
 		if (Math.abs(yVal) < 0.05) yVal = 0;
 		if (Math.abs(twist) < 0.05) twist = 0;
 		
-		double adjustor = ((2*Math.sqrt(2))/2) + Math.abs(twist);
+		double adjustor = Math.sqrt(2) + Math.abs(twist);
 		
 		double speed = Math.sqrt((Math.pow(xVal, 2)) + (Math.pow(yVal, 2)));
 		double angle = Math.asin(yVal/speed) + orientation;
@@ -127,10 +144,10 @@ public class mecanumDrive extends Subsystem {
 		
 		//Drives the motors
 		while (Utility.getFPGATime() - initTime <= millisecondsToRun){
-			FrontRight.set((yVal - xVal)/1.45);
-			BackLeft.set((yVal - xVal)/1.45);
-			FrontLeft.set((yVal + xVal)/1.45);
-			BackRight.set((yVal + xVal)/1.45);
+			FrontRight.set((yVal - xVal)/Math.sqrt(2));
+			BackLeft.set((yVal - xVal)/Math.sqrt(2));
+			FrontLeft.set((yVal + xVal)/Math.sqrt(2));
+			BackRight.set((yVal + xVal)/Math.sqrt(2));
 		}
 		
 	}

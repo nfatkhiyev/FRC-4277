@@ -13,7 +13,7 @@ public class JoystickDriveCommand extends Command {
     public JoystickDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires( new mecanumDrive(0, 1, 2, 3));
+    	requires( new mecanumDrive(1, 2, 3, 4)); // FR 1 BR 3 FL 2 BL 4
     	
     }
 
@@ -31,7 +31,7 @@ public class JoystickDriveCommand extends Command {
     		mecanumDrive.mechJoystickDrive(OI.getdriveStick());
     	}
     	if(gyroDrive == true) {
-    		mecanumDrive.mechJoystickGyroDrive(OI.getdriveStick(), OI.getGyro());
+    		mecanumDrive.mechJoystickGyroDrive(OI.getdriveStick(), OI.getGyroAngle());
     	}
     }
 
