@@ -1,7 +1,6 @@
 package org.usfirst.frc.team4277.robot;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;// THIS IS AN EXAMPLE GYRO!!!!!!!
 
