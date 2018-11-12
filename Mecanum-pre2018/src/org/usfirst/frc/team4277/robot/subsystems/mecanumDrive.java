@@ -52,10 +52,17 @@ public class mecanumDrive extends Subsystem {
 			FrontLeft.setSafetyEnabled(true);
 			//BackRight.setSafetyEnabled(true);
 			BackLeft.setSafetyEnabled(true);
+<<<<<<< HEAD
 			/*FrontRight.setVoltageRampRate(6);
 			FrontLeft.setVoltageRampRate(6);
 			BackRight.setVoltageRampRate(6);
 			BackLeft.setVoltageRampRate(6);*/
+=======
+			FrontRight.setVoltageRampRate(6);
+			FrontLeft.setVoltageRampRate(6);
+			BackRight.setVoltageRampRate(6);
+			BackLeft.setVoltageRampRate(6);
+>>>>>>> c221a25d80313e7831d22946c35bfbd52cccd3ac
 		}
 
     public void initDefaultCommand() {
