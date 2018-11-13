@@ -31,7 +31,7 @@ public interface RobotMap {
 	
 	//Auto test numbers
 	public static double X_DISTANCE = 0.0;
-	public static double Y_DISTANCE = 5.0;
+	public static double Y_DISTANCE = 5;
 	public static double DEGREES_OF_ROTATION = 0.0;
-	public static double TIME = 2.0;
+	public static double TIME = 3.00;
 }

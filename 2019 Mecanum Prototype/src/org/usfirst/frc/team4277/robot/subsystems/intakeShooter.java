@@ -27,14 +27,14 @@ public class intakeShooter extends Subsystem {
     }
     
     public void intakeCubeXBOX(Joystick stickXBOX) {
-    	if (Math.abs(stickXBOX.getRawAxis(5)) < 0.05) {
+    	if (Math.abs(stickXBOX.getRawAxis(5)) < 0.1) {
     		INTAKE_LEFT.set(ControlMode.PercentOutput, 0.4);
     		INTAKE_RIGHT.set(ControlMode.PercentOutput, 0.4);
     		
     		SHOOTER_LEFT.set(ControlMode.PercentOutput, 0.3);
     		SHOOTER_RIGHT.set(ControlMode.PercentOutput, 0.3);
     	}
-    	else if (Math.abs(stickXBOX.getRawAxis(5)) > 0.05) {
+    	else if (Math.abs(stickXBOX.getRawAxis(5)) > 0.1) {
     		INTAKE_LEFT.set(ControlMode.PercentOutput, -(stickXBOX.getRawAxis(5)));
     		INTAKE_RIGHT.set(ControlMode.PercentOutput,-(stickXBOX.getRawAxis(5)));
     		
@@ -44,14 +44,14 @@ public class intakeShooter extends Subsystem {
     }
     
     public void outtakeCubeXBOX(Joystick stickXBOX) {
-    	if (Math.abs(stickXBOX.getRawAxis(5)) < 0.05) {
+    	if (Math.abs(stickXBOX.getRawAxis(5)) < 0.1) {
     		INTAKE_LEFT.set(ControlMode.PercentOutput, -0.4);
     		INTAKE_RIGHT.set(ControlMode.PercentOutput, -0.4);
     		
     		SHOOTER_LEFT.set(ControlMode.PercentOutput, -0.3);
     		SHOOTER_RIGHT.set(ControlMode.PercentOutput, -0.3);
     	}
-    	else if(Math.abs(stickXBOX.getRawAxis(5)) > 0.05) {
+    	else if(Math.abs(stickXBOX.getRawAxis(5)) > 0.1) {
     		INTAKE_LEFT.set(ControlMode.PercentOutput, stickXBOX.getRawAxis(5));
     		INTAKE_RIGHT.set(ControlMode.PercentOutput, stickXBOX.getRawAxis(5));
     		

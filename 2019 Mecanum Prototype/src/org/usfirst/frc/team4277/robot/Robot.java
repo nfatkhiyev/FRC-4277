@@ -45,7 +45,7 @@ public class Robot extends TimedRobot implements RobotMap {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", m_chooser);
 		
-		m_oi.resetGyro();
+		OI.resetGyro();
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Robot extends TimedRobot implements RobotMap {
 		/*if (m_autonomousCommand != null) {
 			m_autonomousCommand.start();
 		}*/
-		m_oi.resetGyro();
+		OI.resetGyro();
 		new AutoTestCommand(X_DISTANCE,Y_DISTANCE,DEGREES_OF_ROTATION,TIME).start();
 	}
 
@@ -111,6 +111,7 @@ public class Robot extends TimedRobot implements RobotMap {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		OI.resetGyro();
 	}
 
 	/**

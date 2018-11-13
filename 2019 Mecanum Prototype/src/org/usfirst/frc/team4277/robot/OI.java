@@ -19,7 +19,7 @@ import org.usfirst.frc.team4277.robot.commands.*;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+public class OI implements RobotMap {
 	
 	private Joystick driveStick = new Joystick(0);
 	private Joystick XBOX = new Joystick(1);
@@ -29,7 +29,9 @@ public class OI {
 	private JoystickButton xXBOX = new JoystickButton(XBOX,3);
 	private JoystickButton rightAxisXBOX = new JoystickButton(XBOX,10);
 	
-	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	private JoystickButton bXBOX = new JoystickButton(XBOX,2);
+	
+	private static ADXRS450_Gyro gyro = new ADXRS450_Gyro();
 	private DigitalInput photoElectric = new DigitalInput(1);
 	
 	public OI() {
@@ -37,6 +39,8 @@ public class OI {
 		leftBumperXBOX.whileHeld(new OuttakeCubeCommand());
 		xXBOX.whileHeld(new ShootCubeCommand());
 		rightAxisXBOX.whenPressed(new StopCommand());
+		
+		bXBOX.whenPressed(new AutoTestCommand(X_DISTANCE,Y_DISTANCE,DEGREES_OF_ROTATION,TIME));
 	}
 	
 	public Joystick getDriveStick() {
@@ -50,7 +54,7 @@ public class OI {
 	public Gyro getGyro() {
 		return gyro;
 	}
-	public void resetGyro() {
+	public static void resetGyro() {
 		gyro.reset();
 	}
 	public boolean getPhotoElectric() {

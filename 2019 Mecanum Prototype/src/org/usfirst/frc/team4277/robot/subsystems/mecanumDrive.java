@@ -22,15 +22,15 @@ public class mecanumDrive extends Subsystem {
 	
 	private static WPI_TalonSRX FRONT_LEFT_TALON, FRONT_RIGHT_TALON, BACK_LEFT_TALON, BACK_RIGHT_TALON;
 	
-	static final double measuredTopSpeedStraight = 15.17034;// ft/second
-	static final double measuredTopSpeedSide = 6; // ft/second
+	static final double measuredTopSpeedStraight = 9.6;// ft/second
+	static final double measuredTopSpeedSide = 6.383; // ft/second
 	static final double measuredTopSpeedRotational = 10; //degrees per second
 
-    public mecanumDrive(int frontLeft, int frontRight, int backLeft, int backRight) {
+    public mecanumDrive(int frontLeft, int backLeft, int frontRight, int backRight) {
     	
     	FRONT_LEFT_TALON = new WPI_TalonSRX(frontLeft);
-    	FRONT_RIGHT_TALON = new WPI_TalonSRX(frontRight);
     	BACK_LEFT_TALON = new WPI_TalonSRX(backLeft);
+    	FRONT_RIGHT_TALON = new WPI_TalonSRX(frontRight);
     	BACK_RIGHT_TALON = new WPI_TalonSRX(backRight);
     	
     	drive = new RobotDrive(FRONT_LEFT_TALON, BACK_LEFT_TALON, FRONT_RIGHT_TALON, BACK_RIGHT_TALON);
@@ -40,17 +40,23 @@ public class mecanumDrive extends Subsystem {
     	
     }
     
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        setDefaultCommand(new JoystickDriveCommand());
+    }
+    
     //Joystick mecanum drive that is not field oriented
     public void joystickDrive(Joystick stick) {
-    	double xVal = Math.pow(stick.getX(), 3);
-    	double yVal = Math.pow(stick.getY(), 3);
+    	double xVal = Math.pow(stick.getX(), (1/3) );
+    	double yVal = Math.pow(stick.getY(), (1/3) );
     	drive.mecanumDrive_Cartesian(xVal, yVal, stick.getZ(), 0);
+    	
     }
     
     //Joystick mecanum drive that uses a gyroscope for field oriented driving
     public void joystickFieldOrientatedDrive(Joystick stick, Gyro gyro) {
-    	double xVal = Math.pow(stick.getX(), 3);
-    	double yVal = Math.pow(stick.getY(), 3);
+    	double xVal = Math.pow(stick.getX(), (1/3) );
+    	double yVal = Math.pow(stick.getY(), (1/3) );
     	drive.mecanumDrive_Cartesian(xVal, yVal, stick.getZ(), gyro.getAngle());
     }
     
@@ -86,7 +92,15 @@ public class mecanumDrive extends Subsystem {
     	double vX = kX*xX*(distanceX - xX);
     	double vY = kY*xY*(distanceY - xY);
     	
-    	velocityVector = new Vector2d(vX,vY);
+    	if (distanceX == 0) {
+    		velocityVector = new Vector2d(0.0,vY);
+    	}
+    	else if(distanceY == 0) {
+    		velocityVector = new Vector2d(vX,0.0);
+    	}
+    	else {
+    		velocityVector = new Vector2d(vX,vY);
+    	}
     	
     	driveVector = new Vector2d(velocityVector.x/measuredTopSpeedStraight,velocityVector.y/measuredTopSpeedSide);
     	
@@ -107,19 +121,17 @@ public class mecanumDrive extends Subsystem {
 
     	double vZ = kZ*xZ*(degrees - xZ);
     	
-    	velocity = vZ;
+    	if(degrees == 0.0) {
+    		velocity = 0;
+    	}
+    	else {
+    		velocity = vZ;
+    	}
     	
     	driveValue = velocity/measuredTopSpeedRotational;
     	
     	return driveValue;
     }
   
-
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        setDefaultCommand(new JoystickDriveCommand());
-    }
-    
-    
 }
 
